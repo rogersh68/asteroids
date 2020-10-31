@@ -42,9 +42,9 @@ class Game(arcade.Window):
         self.asteroids = []
         
         # Start with 5 asteroids
-        for i in range (0, INITIAL_ROCK_COUNT):
+        for asteroid in range (0, INITIAL_ROCK_COUNT):
             self.asteroids.append(BigAsteroid())
-        
+
         self.ship = Ship()
         
         self.bullets = []
@@ -186,8 +186,8 @@ class Game(arcade.Window):
                     abs(asteroid.center.y - self.ship.center.y) < too_close):
                     # Remove ship life
                     self.ship.hit()
-                    # Break the asteroid apart
-                    self.break_asteroid(asteroid)
+                    # Kill the asteroid
+                    asteroid.alive = False
             
         # Remove dead objects
         self.remove_dead_objects()
@@ -202,29 +202,24 @@ class Game(arcade.Window):
             # Remove old asteroid
             old = self.asteroids.pop(self.asteroids.index(asteroid))
             
-            # Get old asteroid's position and velocity
-            x = old.center.x
-            y = old.center.y
-            dx = old.velocity.dx
-            dy = old.velocity.dy
-            
             # Create first medium asteroid
             med1 = MediumAsteroid()
             med1.center.x = old.center.x
             med1.center.y = old.center.y
-            #med1.velocity.dy = dy + 2
+            med1.velocity.dy = old.velocity.dy + 2
+            med1.velocity.dx = old.velocity.dx + 1
             
             # Create second medium asteroid
             med2 = MediumAsteroid()
             med2.center.x = old.center.x
             med2.center.y = old.center.y
-            #med2.velocity.dy = dy - 2
+            med2.velocity.dy = old.velocity.dy - 2
             
             # Create small asteroid
             small = SmallAsteroid()
             small.center.x = old.center.x
             small.center.y = old.center.y
-            #small.velocity.dx = dx + 5
+            small.velocity.dx = old.velocity.dx + 5
             
             # add new asteroids to the asteroids array
             self.asteroids.extend([med1, med2, small])
@@ -234,25 +229,19 @@ class Game(arcade.Window):
             # Remove old asteroid
             old = self.asteroids.pop(self.asteroids.index(asteroid))
             
-            # Get old asteroid's position and velocity
-            x = old.center.x
-            y = old.center.y
-            dx = old.velocity.dx
-            dy = old.velocity.dy
-            
             # Create first small asteroid
             small1 = SmallAsteroid()
             small1.center.x = old.center.x
             small1.center.y = old.center.y
-            small1.velocity.dx = dx + 1.5
-            small1.velocity.dy = dx + 1.5
+            small1.velocity.dx = old.velocity.dx + 1.5
+            small1.velocity.dy = old.velocity.dy + 1.5
             
             # Create second small asteroid
             small2 = SmallAsteroid()
             small2.center.x = old.center.x
             small2.center.y = old.center.y
-            small2.velocity.dx = dx - 1.5
-            small2.velocity.dy = dy - 1.5
+            small2.velocity.dx = old.velocity.dx - 1.5
+            small2.velocity.dy = old.velocity.dy - 1.5
             
             # add new asteroids to the asteroids array
             self.asteroids.extend([small1, small2])

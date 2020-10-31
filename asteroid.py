@@ -9,11 +9,8 @@ class Asteroid(FlyingObject):
     """
     def __init__(self):
         super().__init__()
-        self.direction = random.randint(1, 50)
         self.spin = 0.0
         self.speed = 0.0
-        self.velocity.dx = math.cos(math.radians(self.direction)) * self.speed
-        self.velocity.dy = math.sin(math.radians(self.direction)) * self.speed
         
     def advance(self):
         # Copy base advance method

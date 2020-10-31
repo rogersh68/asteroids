@@ -1,5 +1,5 @@
 from asteroid import Asteroid
-from constants import SMALL_ROCK_RADIUS, SMALL_ROCK_SPIN, SMALL_ROCK_SPEED
+from constants import SMALL_ROCK_RADIUS, SMALL_ROCK_SPIN
 
 class SmallAsteroid(Asteroid):
     """
@@ -10,7 +10,6 @@ class SmallAsteroid(Asteroid):
         self.img = "images/meteorGrey_small1.png"
         self.radius = SMALL_ROCK_RADIUS
         self.spin = SMALL_ROCK_SPIN
-        self.speed = SMALL_ROCK_SPEED
         
     def hit(self):
         # Kill the asteroid

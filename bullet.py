@@ -15,11 +15,11 @@ class Bullet(FlyingObject):
         self.life = BULLET_LIFE
         self.center.x = shipX
         self.center.y = shipY
-        self.angle = shipAngle + 90
+        self.angle = shipAngle
         
     def fire(self):
-        self.velocity.dx -= math.sin(math.radians(self.angle + 270)) * self.speed
-        self.velocity.dy += math.cos(math.radians(self.angle + 270)) * self.speed
+        self.velocity.dx -= math.sin(math.radians(self.angle - 270)) * self.speed
+        self.velocity.dy += math.cos(math.radians(self.angle - 270)) * self.speed
         
     def advance(self):
         # Copy base advance method
